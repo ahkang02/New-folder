@@ -1,6 +1,5 @@
 import pickle as pk
 import pandas as pd
-import flask as flask
 from flask import Flask, render_template, redirect, url_for, request
 app = Flask(__name__)
 
