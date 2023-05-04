@@ -1,0 +1,633 @@
+{% extends "base.html" %}
+{% block title %} Obesity Predictor {% endblock %}
+{% block content %}
+<div class="my-3">
+  <h1 class="text-center">Obesity Predictor</h1>
+</div>
+<div
+  class="container d-flex justify-content-center min-vh-100 align-items-center border rounded pt-3 pb-3 mb-3"
+>
+  <form method="POST" action="{{ url_for('result') }}">
+    <div class="mb-3">
+      <div>
+        <label for="exampleInputEmail1" class="form-label"
+          >What is your gender?</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="gender"
+          id="inlineRadio1"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Female</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="gender"
+          id="inlineRadio2"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2">Male</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label"
+        >What is your age?</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="exampleInputEmail1"
+        name="age"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label"
+        >What is your height?</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="exampleInputEmail1"
+        name="height"
+        step="0.01"
+        min="0"
+        max="3"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label"
+        >What is your weight?</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="exampleInputEmail1"
+        name="weight"
+        step="0.01"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <div>
+        <label for="exampleInputEmail1" class="form-label"
+          >Has a family member suffered or suffers from overweight?</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="overWeight"
+          id="inlineRadio1"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="overWeight"
+          id="inlineRadio2"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2">No</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div>
+        <label for="exampleInputEmail1" class="form-label"
+          >Do you eat high caloric food frequently?</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="caloric"
+          id="inlineRadio1"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="caloric"
+          id="inlineRadio2"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2">No</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div>
+        <label for="exampleInputEmail1" class="form-label"
+          >Do you usually eat vegetables in your meals?</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="vegetables"
+          id="inlineRadio1"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Never</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="vegetables"
+          id="inlineRadio2"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2">Sometimes</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="vegetables"
+          id="inlineRadio1"
+          value="2"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Always</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div>
+        <label for="exampleInputEmail1" class="form-label"
+          >How many main meals do you have daily?</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="mealsDaily"
+          id="inlineRadio1"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Between 1 & 2</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="mealsDaily"
+          id="inlineRadio2"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2">Three</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="mealsDaily"
+          id="inlineRadio1"
+          value="2"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1"
+          >More than three</label
+        >
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div>
+        <label for="exampleInputEmail1" class="form-label"
+          >Do you eat any food between meals?</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="betweenMeals"
+          id="inlineRadio1"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">No</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="betweenMeals"
+          id="inlineRadio2"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2">Sometimes</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="betweenMeals"
+          id="inlineRadio1"
+          value="2"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Frequently</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="betweenMeals"
+          id="inlineRadio1"
+          value="3"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Always</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div>
+        <label for="exampleInputEmail1" class="form-label">Do you smoke?</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="smoke"
+          id="inlineRadio1"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="smoke"
+          id="inlineRadio2"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2">No</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div>
+        <label for="exampleInputEmail1" class="form-label"
+          >How much water do you drink daily?</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="water"
+          id="inlineRadio1"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1"
+          >Less than a liter</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="water"
+          id="inlineRadio2"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2"
+          >Between 1 and 2 L</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="water"
+          id="inlineRadio1"
+          value="2"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">More than 2 L</label>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <label for="exampleInputEmail1" class="form-label"
+          >Do you monitor the calories you eat daily?</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="monitor"
+          id="inlineRadio1"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="monitor"
+          id="inlineRadio2"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2">No</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div>
+        <label for="exampleInputEmail1" class="form-label"
+          >How often do you have physical activity?</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="physicalActivity"
+          id="inlineRadio1"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">I do not have</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="physicalActivity"
+          id="inlineRadio2"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2">1 or 2 days</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="physicalActivity"
+          id="inlineRadio1"
+          value="2"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">2 or 4 days</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="physicalActivity"
+          id="inlineRadio1"
+          value="3"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">4 or 5 days</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div>
+        <label for="exampleInputEmail1" class="form-label"
+          >How much time do you use technological devices such as cell phone,
+          videogames, television, computer and others?</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="devices"
+          id="inlineRadio1"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">0 - 2 hours</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="devices"
+          id="inlineRadio2"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2">3 - 5 hours</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="devices"
+          id="inlineRadio1"
+          value="2"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1"
+          >More than 5 hours</label
+        >
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div>
+        <label for="exampleInputEmail1" class="form-label"
+          >How often do you drink alcohol?</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="alcohol"
+          id="inlineRadio1"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">No</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="alcohol"
+          id="inlineRadio2"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2">Sometimes</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="alcohol"
+          id="inlineRadio1"
+          value="2"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Frequently</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="alcohol"
+          id="inlineRadio1"
+          value="3"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Always</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div>
+        <label for="exampleInputEmail1" class="form-label"
+          >Which transportation do you usually use?</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="transportation"
+          id="inlineRadio1"
+          value="1"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Automobile</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="transportation"
+          id="inlineRadio2"
+          value="3"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio2">Motorbike</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="transportation"
+          id="inlineRadio1"
+          value="4"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Bike</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="transportation"
+          id="inlineRadio1"
+          value="0"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1"
+          >Public Transportation</label
+        >
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="transportation"
+          id="inlineRadio1"
+          value="2"
+          required
+        />
+        <label class="form-check-label" for="inlineRadio1">Walking</label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endblock %}

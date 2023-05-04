@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block title %} Obesity Predictor {% endblock %} {%
+block content %}
+<div
+  class="container-fluid d-flex align-items-center justify-content-center min-vh-100"
+>
+  <div class="container text-center">
+    <div class="container-fluid">
+      <h1>
+        Knowledge is power, and WeightLoss! puts the power in your hands. Take
+        control of your health and unlock a healthier future with personalized
+        weight insights.
+      </h1>
+    </div>
+    <br/>
+    <div>
+      <a
+        class="btn btn-primary btn-lg"
+        href="{{ url_for('obesity')}}"
+        role="button"
+        >Predict Now!</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}
